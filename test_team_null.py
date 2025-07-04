@@ -11,6 +11,20 @@ class TestTeam_null(unittest.TestCase):
 
     def test_us_ssn(self):
         """Test US_SSN functionality"""
+        pre = '123'
+        mid = '12'
+        suffix = '1234'
+        # Positive test case
+        result = analyze_text(f'My SSN is {pre}-{mid}-{suffix}', ['US_SSN'])
+        # Check to make sure there is one result
+        self.assertEqual(len(result), 1, 'Should have found 1 SSN so length should be 1')
+        # Check that a SSN was actually found
+        self.assertEqual(result[0].entity_type, 'US_SSN', 'US_SSN entity type is expected')
+
+        # Negative test case
+        result = analyze_text('My SSN is 123-45-6789', ['US_SSN'])
+        # Check to make sure there is no result
+        self.assertEqual(len(result), 0, 'Negative test case should not find a result')
 
 
 if __name__ == '__main__':
