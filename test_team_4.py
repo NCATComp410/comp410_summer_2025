@@ -1,10 +1,12 @@
 """Unit test file for team 4"""
+from typing import Self
 import unittest
-from pii_scan import analyze_text, show_aggie_pride  # noqa 
+from pii_scan import analyze_text, show_aggie_pride  # noqa
 
 
 class TestTeam_4(unittest.TestCase):
     """Test team 4 PII functions"""
+
     def test_show_aggie_pride(self):
         """Test to make sure Aggie Pride is shown correctly"""
         self.assertEqual(show_aggie_pride(), "Aggie Pride - Worldwide")
@@ -24,7 +26,7 @@ class TestTeam_4(unittest.TestCase):
         self.assertEqual(len(result), 1, "Should have found 1 PHONE_NUMBER so length should be 1")
 
         # Verify the correct entity type
-        self.assertEqual(result[0].entity_type, "PHONE_NUMBER", "PHONE_NUMBER entity type is expected")
+        self.assertEqual(result[0].entity_type, "PHONE_NUMBER","PHONE_NUMBER entity type is expected")
 
         # Negative test case — no phone number present
         text = "Let's meet at the library later today."
@@ -33,11 +35,27 @@ class TestTeam_4(unittest.TestCase):
         # Verify no PHONE_NUMBER was detected
         self.assertEqual(len(result), 0, "Negative test case should not find a result")
 
+     def test_us_passport(self):
+        # Positive test case – valid US passport number (9 digits)
+        text = "My US passport number is 123456789."
+        result = analyze_text(text, ['US_PASSPORT'])
 
+        # Check that one US_PASSPORT was detected
+        Self.assertGreaterEqual(len(result), 1, "Should have found at least 1 US_PASSPORT")
 
-    def test_us_passport(self):
-        """Test US_PASSPORT functionality"""
+        # Verify the correct entity type is present
+        found_passport = any(r.entity_type == "US_PASSPORT" for r in result)
+        Self.assertTrue(found_passport, "Expected US_PASSPORT entity to be detected")
 
+        # Negative test case – similar format but should not be detected
+        text = "My student ID number is 987654321."
+        result = analyze_text(text, ['US_PASSPORT'])
+
+        # Ensure no US_PASSPORT entity is detected
+        found_passport = any(r.entity_type == "US_PASSPORT" for r in result)
+        self.assertFalse(found_passport, "Negative test should not detect a US_PASSPORT")
+
+    
     def test_person(self):
         """Test PERSON functionality"""
 
