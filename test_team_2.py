@@ -19,7 +19,22 @@ class TestTeam_2(unittest.TestCase):
         """Test DATE_TIME functionality"""
 
     def test_email_address(self):
+        #Ari Rozier: Team 2
         """Test EMAIL_ADDRESS functionality"""
+        # positive test case
+        result = analyze_text('example@example.com', ['EMAIL_ADDRESS'])
+
+        #error handeling if more than 1 submission
+        self.assertEqual(len(result), 1, 'Only 1 submission is expected')
+        #error handeling if result is NOT an Email Address Type
+        self.assertEqual(result[0].entity_type, 'EMAIL_ADDRESS', 'Should have found a valid email address. Including the name and domain type.')
+
+        #negative test case
+        result = analyze_text('example@123.com', ['EMAIL_ADDRESS'])
+        #error handeling if more than 1 submission
+        self.assertEqual(len(result), 0, 'There shouldnt be anything in the user test case')
+        #error handeling if result is NOT an Email Address Type
+        self.assertEqual(result[0].entity_type, 'EMAIL_ADDRESS', 'Should have found a valid email address. Including the name and domain type.')
 
 
 if __name__ == '__main__':
