@@ -26,6 +26,20 @@ class TestTeam_1(unittest.TestCase):
 
     def test_au_medicare(self):
         """Test AU_MEDICARE functionality"""
+        pre = 2456
+        mid = 78129
+        suffix = 9
+        #Positive test: should detect AU_MEDICARE
+        results = analyze_text(f'Our AU_MEDICARE is {pre} {mid} {suffix}', ['AU_MEDICARE'])
+        #Check to make sure there is one result
+        self.assertEqual(len(results), 1, "Should detect AU_MEDICARE")
+        #Check to make sure AU_MEDICARE was found
+        self.assertEqual(results[0].entity_type, "AU_MEDICARE", "Detected entity should be AU_MEDICARE")
+
+        #Negative Test: Shouldn't Detect AU_MEDICARE
+        text_without_aumedicare = "This contains no buisness identifier"
+        results = analyze_text(text_without_aumedicare, ["AU_MEDICARE"])
+        self.assertEqual(len(results), 0, "Should not detect AU_MEDICARE in plain text")
 
     def test_au_tfn(self):
         """Test AU_TFN functionality"""
