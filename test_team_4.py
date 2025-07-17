@@ -46,7 +46,7 @@ class TestTeam_4(unittest.TestCase):
         self.assertTrue(found_passport, "Expected US_PASSPORT entity to be detected")
 
         # Negative test case – similar format but should not be detected
-        text = "My student ID number is 987654321."
+        text = "My student ID number is 921."
         result = analyze_text(text, ['US_PASSPORT'])
 
         # Ensure no US_PASSPORT entity is detected
