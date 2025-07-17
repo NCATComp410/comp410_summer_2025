@@ -20,6 +20,10 @@ class TestTeam_3(unittest.TestCase):
         # Positive Test case
         result = analyze_text('My Drivers License number is 0000123122424' , ['US_DRIVER_LICENSE'])
         print (result)
+        # Make sure 1 valid result was found
+        self.assertEqual(len(result), 1)
+        # Make sure it was a US_DRIVER_LICENSE
+        self.assertEqual(result[0].entity_type, 'US_DRIVER_LICENSE', 'Valid License Number')
 
         # Negative test case
         result = analyze_text('My Drivers License number is XYZ999' , ['US_DRIVER_LICENSE'])
