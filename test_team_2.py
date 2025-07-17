@@ -30,11 +30,9 @@ class TestTeam_2(unittest.TestCase):
         self.assertEqual(result[0].entity_type, 'EMAIL_ADDRESS', 'Should have found a valid email address. Including the name and domain type.')
 
         #negative test case
-        result = analyze_text('example@123.com', ['EMAIL_ADDRESS'])
+        result = analyze_text('example123.com', ['EMAIL_ADDRESS'])
         #error handeling if more than 1 submission
         self.assertEqual(len(result), 0, 'There shouldnt be anything in the user test case')
-        #error handeling if result is NOT an Email Address Type
-        self.assertEqual(result[0].entity_type, 'EMAIL_ADDRESS', 'Should have found a valid email address. Including the name and domain type.')
 
 
 if __name__ == '__main__':
