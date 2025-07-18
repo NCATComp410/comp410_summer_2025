@@ -20,8 +20,11 @@ class TestTeam_4(unittest.TestCase):
 
     def test_medical_license(self):
         """Test MEDICAL_LICENSE functionality"""
-        result = analyze_text("My medical DEA certificate number is MD1234567", ['MEDICAL_LICENSE'])
+        # positive test case
+        result = analyze_text("My medical DEA certificate number is EU4488929", ['MEDICAL_LICENSE'])
         print(result)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].entity_type, 'MEDICAL_LICENSE')
 
 
 if __name__ == '__main__':
