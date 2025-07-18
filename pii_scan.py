@@ -3,16 +3,22 @@ import re
 import logging
 import spacy
 from presidio_analyzer import AnalyzerEngine, RecognizerRegistry, RecognizerResult
-from presidio_analyzer.predefined_recognizers import (ItDriverLicenseRecognizer,
-                                                      ItVatCodeRecognizer,
-                                                      ItFiscalCodeRecognizer,
-                                                      ItIdentityCardRecognizer,
-                                                      ItPassportRecognizer,
-                                                      EsNieRecognizer,
-                                                      EsNifRecognizer,
-                                                      PlPeselRecognizer,
-                                                      FiPersonalIdentityCodeRecognizer,
-                                                      AbaRoutingRecognizer)
+from presidio_analyzer.predefined_recognizers import (
+    ItDriverLicenseRecognizer,
+    ItVatCodeRecognizer,
+    ItFiscalCodeRecognizer,
+    ItIdentityCardRecognizer,
+    ItPassportRecognizer,
+    EsNieRecognizer,
+    EsNifRecognizer,
+    PlPeselRecognizer,
+    FiPersonalIdentityCodeRecognizer,
+    AbaRoutingRecognizer,
+    AuAbnRecognizer,
+    AuAcnRecognizer,
+    AuTfnRecognizer,
+    AuMedicareRecognizer
+)
 
 from presidio_anonymizer import AnonymizerEngine
 import requests
@@ -46,8 +52,13 @@ registry.add_recognizer(ItPassportRecognizer(supported_language='en'))
 registry.add_recognizer(EsNieRecognizer(supported_language='en'))
 registry.add_recognizer(EsNifRecognizer(supported_language='en'))
 registry.add_recognizer(PlPeselRecognizer(supported_language='en'))
-registry.add_recognizer(FiPersonalIdentityCodeRecognizer(supported_language='en'))
+registry.add_recognizer(
+    FiPersonalIdentityCodeRecognizer(supported_language='en'))
 registry.add_recognizer(AbaRoutingRecognizer(supported_language='en'))
+registry.add_recognizer(AuAbnRecognizer(supported_language='en'))
+registry.add_recognizer(AuAcnRecognizer(supported_language='en'))
+registry.add_recognizer(AuTfnRecognizer(supported_language='en'))
+registry.add_recognizer(AuMedicareRecognizer(supported_language='en'))
 
 
 # Create an analyzer object
