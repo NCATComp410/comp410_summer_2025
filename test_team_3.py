@@ -17,7 +17,7 @@ class TestTeam_3(unittest.TestCase):
         #Positive test case
     test_str = "My bank account number is 12345678901."
     result = analyze_text(test_str, ['Us_BN'])
-    self.assertGreater(len(result), 0, 'No bank number detected in standard format')
+    self.assertGreater(len(result), 0, 'No bank number detected ')
     self.assertEqual(result[0].entity_type, 'Us_BN')
     #Negative test case
     test_str = "Number 201213"
