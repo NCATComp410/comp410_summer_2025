@@ -31,7 +31,7 @@ class TestTeam_4(unittest.TestCase):
 
         # negative test case
         result = analyze_text("My medical DEA certificate number is MD1488929", ['MEDICAL_LICENSE'])
-        # check to make sure there is no result
+        # check to see there is no result
         self.assertEqual(len(result), 0)
 
 
