@@ -29,7 +29,16 @@ class TestTeam_1(unittest.TestCase):
 
     def test_au_tfn(self):
         """Test AU_TFN functionality"""
+        # Positive test: should detect AU_TFN
+        text_with_tfn = "The employee's Tax File Number is 123 456 782."
+        results = analyze_text(text_with_tfn, ["AU_TFN"])
+        self.assertGreater(len(results), 0, "Should detect AU_TFN")
+        self.assertEqual(results[0].entity_type, "AU_TFN", "Detected entity should be AU_TFN")
 
+        # Negative test: no AU_TFN present
+        text_without_tfn = "This text contains no tax number."
+        results = analyze_text(text_without_tfn, ["AU_TFN"])
+        self.assertEqual(len(results), 0, "Should not detect AU_TFN in plain text")
 
 if __name__ == '__main__':
     unittest.main()
