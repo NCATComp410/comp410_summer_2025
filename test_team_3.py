@@ -15,12 +15,10 @@ class TestTeam_3(unittest.TestCase):
     def test_us_bank_number(self):
         """Test US_BANK_NUMBER functionality"""
         #Positive test case
-    test_str = "Bank Accounts 89833344476 and 11133345623 have the money in there."
-    result = analyze_text(test_str,['US_BN'] )
-    self.assertEqual(len(result),0), ('Should have found 0 Bank Numbers')
-       #Check that a BN was found
-    for entity in result:
-            self.assertEqual(entity.entity_type, 'Us_BN')
+    test_str = "My bank account number is 12345678901."
+    result = analyze_text(test_str, ['Us_BN'])
+    self.assertGreater(len(result), 0, 'No bank number detected in standard format')
+    self.assertEqual(result[0].entity_type, 'Us_BN')
     #Negative test case
     test_str = "Number 201213"
     result = analyze_text(test_str,['US_BN'] )
