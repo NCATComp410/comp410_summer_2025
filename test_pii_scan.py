@@ -1,6 +1,7 @@
 """Some unit tests for the PII scan module."""
 import unittest
 import os
+from pathlib import Path
 import ast
 from pii_scan import show_aggie_pride, analyze_text
 
@@ -54,8 +55,7 @@ class TestPIIScan(unittest.TestCase):
                               'IN_PASSPORT',
                               'IN_VOTER',
                               'IN_AADHAAR',
-                              'IN_PAN']
-        
+                              'IN_PAN']    
         for entity in supported_entities:
             self.assertIn(entity, results)
 
@@ -64,15 +64,14 @@ class TestPIIScan(unittest.TestCase):
         # In order to run as a test case the method name must start with test
         # This test checks to make sure all defines within test files start with test
         # This is a common mistake that can cause tests to be skipped
-        from pathlib import Path
         for file in Path(os.path.dirname(__file__)).glob('test_*.py'):
             with file.open(encoding='utf-8') as f:
                 tree = ast.parse(f.read(), filename=file)
                 for node in ast.walk(tree):
-                        if isinstance(node, ast.FunctionDef):
-                            method_name = node.name
-                            # Skip legitimate non-test methods like setUp, tearDown, and private methods
-                            if method_name in {'setUp', 'tearDown'} or method_name.startswith('_'):
-                                continue
-                            self.assertTrue(method_name.startswith('test'),
-                                            f'Method name does not start with test: def {method_name} in {file}')
+                    if isinstance(node, ast.FunctionDef):
+                        method_name = node.name
+                        # Skip legitimate non-test methods like setUp, tearDown, and private methods
+                        if method_name in {'setUp', 'tearDown'} or method_name.startswith('_'):
+                            continue
+                        self.assertTrue(method_name.startswith('test'),
+                                        f'Method name does not start with test: def {method_name} in {file}')
