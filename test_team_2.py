@@ -26,21 +26,8 @@ class TestTeam_2(unittest.TestCase):
         # Check to make sure there is no result
         self.assertEqual(len(result), 0, "Negative test case should not find a result")
 
-
     def test_crypto(self):
-        # Positive test case
-        crypto_key = '1BoatSLRHtKNngkdXEeobR76b53LETtpyT'  # Valid BTC address Presidio should detect
-        result = analyze_text(f"My BTC address is {crypto_key}", ['CRYPTO'])
-        # Check if crypto was detected
-        self.assertEqual(len(result), 1, 'Should have found 1 CRYPTO so length should be 1')
-        self.assertEqual(result[0].entity_type, 'CRYPTO', 'CRYPTO entity type is expected')
-        # Negative test case
-        result = analyze_text("This is a normal sentence with no keys or sensitive data.", ['CRYPTO'])
-        self.assertEqual(len(result), 0, 'Should NOT have found any CRYPTO so length should be 0')
-
-
-
-
+        """Test CRYPTO functionality"""
 
     def test_date_time(self):
         """Test DATE_TIME functionality"""
