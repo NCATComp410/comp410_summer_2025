@@ -11,6 +11,21 @@ class TestTeam_2(unittest.TestCase):
 
     def test_credit_card(self):
         """Test CREDIT_CARD functionality"""
+        start = "4111"
+        mid = "1111"
+        end = "1111 1111"
+        # Positive test case
+        result = analyze_text(f"My credit card number is {start} {mid} {end}", ['CREDIT_CARD'])
+        # Check to make sure there is one result
+        self.assertEqual(len(result), 1, "Should have found 1 CREDIT_CARD so length should be 1")
+        # Check that a CREDIT_CARD was actually found
+        self.assertEqual(result[0].entity_type, "CREDIT_CARD", "CREDIT_CARD entity type is expected")
+
+        # Negative test case
+        result = analyze_text("My credit card number is 1234-5678-9101 1213", ['CREDIT_CARD'])
+        # Check to make sure there is no result
+        self.assertEqual(len(result), 0, "Negative test case should not find a result")
+
 
     def test_crypto(self):
         """Test CRYPTO functionality"""
