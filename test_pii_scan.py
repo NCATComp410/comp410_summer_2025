@@ -67,8 +67,8 @@ class TestPIIScan(unittest.TestCase):
         from pathlib import Path
         for file in Path(os.path.dirname(__file__)).glob('test_*.py'):
             with file.open(encoding='utf-8') as f:
-                    tree = ast.parse(f.read(), filename=file)
-                    for node in ast.walk(tree):
+                tree = ast.parse(f.read(), filename=file)
+                for node in ast.walk(tree):
                         if isinstance(node, ast.FunctionDef):
                             method_name = node.name
                             # Skip legitimate non-test methods like setUp, tearDown, and private methods
