@@ -1,6 +1,7 @@
 """Unit test file for team 3"""
 import unittest
 from pii_scan import analyze_text, show_aggie_pride  # noqa
+
 class TestTeam_3(unittest.TestCase):
     """Test team 3 PII functions"""
     def test_show_aggie_pride(self):
@@ -16,8 +17,8 @@ class TestTeam_3(unittest.TestCase):
         # Check to ensure that the URL was found
         self.assertEqual(result[0].entity_type, 'URL', 'URL entity type is expected')
 
-         #Negative test case
-        result = analyze_text('My URL is www.ncat.edu', ['URL'])
+        # Negative test case
+        result = analyze_text('My URL is wwwncatedu', ['URL'])
         # Check to make sure there is 0 results
         self.assertEqual(len(result), 0, "Negative case shouldn't find a result")
 
