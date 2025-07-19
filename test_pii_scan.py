@@ -65,11 +65,10 @@ class TestPIIScan(unittest.TestCase):
         from pathlib import Path
         for file in Path(os.path.dirname(__file__)).glob('test_*.py'):
             with file.open(encoding='utf-8') as f:
-                    for line in f:
-                        # make sure everything that looks like a method name starts with test
-                        m = re.search(r'\s*def (\w+)', line)
-                        if m:
-                            method_name = m.group(1)
+                    tree = ast.parse(f.read(), filename=file)
+                    for node in ast.walk(tree):
+                        if isinstance(node, ast.FunctionDef):
+                            method_name = node.name
                             # Skip legitimate non-test methods like setUp, tearDown, and private methods
                             if method_name in {'setUp', 'tearDown'} or method_name.startswith('_'):
                                 continue
