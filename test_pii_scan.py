@@ -13,7 +13,9 @@ class TestPIIScan(unittest.TestCase):
 
     def test_base_supported_entities(self):
         """Test to make sure the default expected supported entities are returned"""
-        results = analyze_text('', [], show_supported=True)
+        EMPTY_TEXT = ''
+        EMPTY_ENTITY_LIST = []
+        results = analyze_text(text=EMPTY_TEXT, entity_list=EMPTY_ENTITY_LIST, show_supported=True)
         supported_entities = ['IP_ADDRESS',
                               'MEDICAL_LICENSE',
                               'LOCATION',
