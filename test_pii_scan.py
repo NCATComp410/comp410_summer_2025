@@ -1,7 +1,7 @@
 """Some unit tests for the PII scan module."""
 import unittest
-import re
 import os
+import ast
 from pii_scan import show_aggie_pride, analyze_text
 
 
