@@ -62,7 +62,7 @@ class TestPIIScan(unittest.TestCase):
         # In order to run as a test case the method name must start with test
         # This test checks to make sure all defines within test files start with test
         # This is a common mistake that can cause tests to be skipped
-        for file in os.listdir('.'):
+        for file in os.listdir(os.path.dirname(__file__)):
             if file.endswith('.py') and file.startswith('test_'):
                 with open(file, encoding='utf-8') as f:
                     for line in f:
