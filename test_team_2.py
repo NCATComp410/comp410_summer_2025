@@ -11,6 +11,21 @@ class TestTeam_2(unittest.TestCase):
 
     def test_credit_card(self):
         """Test CREDIT_CARD functionality"""
+        start = "4111"
+        mid = "1111"
+        end = "1111 1111"
+        # Positive test case
+        result = analyze_text(f"My credit card number is {start} {mid} {end}", ['CREDIT_CARD'])
+        # Check to make sure there is one result
+        self.assertEqual(len(result), 1, "Should have found 1 CREDIT_CARD so length should be 1")
+        # Check that a CREDIT_CARD was actually found
+        self.assertEqual(result[0].entity_type, "CREDIT_CARD", "CREDIT_CARD entity type is expected")
+
+        # Negative test case
+        result = analyze_text("My credit card number is 1234-5678-9101 1213", ['CREDIT_CARD'])
+        # Check to make sure there is no result
+        self.assertEqual(len(result), 0, "Negative test case should not find a result")
+
 
     def test_crypto(self):
         # Positive test case
@@ -31,7 +46,20 @@ class TestTeam_2(unittest.TestCase):
         """Test DATE_TIME functionality"""
 
     def test_email_address(self):
+        #Ari Rozier: Team 2
         """Test EMAIL_ADDRESS functionality"""
+        # positive test case
+        result = analyze_text('example@example.com', ['EMAIL_ADDRESS'])
+
+        #error handeling if more than 1 submission
+        self.assertEqual(len(result), 1, 'Only 1 submission is expected')
+        #error handeling if result is NOT an Email Address Type
+        self.assertEqual(result[0].entity_type, 'EMAIL_ADDRESS', 'Should have found a valid email address. Including the name and domain type.')
+
+        #negative test case
+        result = analyze_text('example123.com', ['EMAIL_ADDRESS'])
+        #error handeling if more than 1 submission
+        self.assertEqual(len(result), 0, 'There shouldnt be anything in the user test case')
 
 
 if __name__ == '__main__':
