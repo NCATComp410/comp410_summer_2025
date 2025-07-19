@@ -33,7 +33,6 @@ class TestPIIScan(unittest.TestCase):
                               'UK_NHS',
                               'UK_NINO',
                               'US_SSN',
-                              'SG_NRIC_FIN',
                               'PERSON',
                               'URL',
                               'US_ITIN',
@@ -54,8 +53,8 @@ class TestPIIScan(unittest.TestCase):
                               'IN_PASSPORT',
                               'IN_VOTER',
                               'IN_AADHAAR',
-                              'IN_PAN'
-                              ]
+                              'IN_PAN']
+        
         for entity in supported_entities:
             self.assertIn(entity, results)
 

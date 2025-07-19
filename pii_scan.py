@@ -17,7 +17,13 @@ from presidio_analyzer.predefined_recognizers import (
     AuAbnRecognizer,
     AuAcnRecognizer,
     AuTfnRecognizer,
-    AuMedicareRecognizer
+    AuMedicareRecognizer,
+    InPanRecognizer,
+    InAadhaarRecognizer,
+    InVehicleRegistrationRecognizer,
+    InPassportRecognizer,
+    InVoterRecognizer,
+    UkNinoRecognizer
 )
 
 from presidio_anonymizer import AnonymizerEngine
@@ -58,6 +64,12 @@ registry.add_recognizer(AuAbnRecognizer(supported_language='en'))
 registry.add_recognizer(AuAcnRecognizer(supported_language='en'))
 registry.add_recognizer(AuTfnRecognizer(supported_language='en'))
 registry.add_recognizer(AuMedicareRecognizer(supported_language='en'))
+registry.add_recognizer(InPanRecognizer(supported_language='en'))
+registry.add_recognizer(InAadhaarRecognizer(supported_language='en'))
+registry.add_recognizer(InVehicleRegistrationRecognizer(supported_language='en'))
+registry.add_recognizer(InPassportRecognizer(supported_language='en'))
+registry.add_recognizer(InVoterRecognizer(supported_language='en'))
+registry.add_recognizer(UkNinoRecognizer(supported_language='en'))
 
 
 # Create an analyzer object
@@ -101,7 +113,9 @@ def anonymize_data(data: list) -> None:
                 print(f'ID:{i}:Anonymized: {anonymize_text(item, [])}')
 
 
-def analyze_text(text: str, entity_list: list, show_supported=False) -> list[str] | list[RecognizerResult]:
+def analyze_text(text: str,
+                 entity_list: list,
+                 show_supported=False) -> list[str] | list[RecognizerResult]:
     """
     Analyze the text using the entity list
     :param text: the text to be analyzed
