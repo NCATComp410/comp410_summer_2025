@@ -40,7 +40,6 @@ class TestPIIScan(unittest.TestCase):
                               'AU_ACN',
                               'IT_VAT_CODE',
                               'IT_IDENTITY_CARD',
-                              'IT_IDENTITY_CARD',
                               'IT_DRIVER_LICENSE',
                               'IT_PASSPORT',
                               'IT_FISCAL_CODE',
