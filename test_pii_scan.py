@@ -69,5 +69,9 @@ class TestPIIScan(unittest.TestCase):
                         # make sure everything that looks like a method name starts with test
                         m = re.search(r'\s*def (\w+)', line)
                         if m:
-                            self.assertTrue(m.group(1).startswith('test'),
-                                            f'Method name does not start with test: def {m.group(1)} in {file}')
+                            method_name = m.group(1)
+                            # Skip legitimate non-test methods like setUp, tearDown, and private methods
+                            if method_name in {'setUp', 'tearDown'} or method_name.startswith('_'):
+                                continue
+                            self.assertTrue(method_name.startswith('test'),
+                                            f'Method name does not start with test: def {method_name} in {file}')
