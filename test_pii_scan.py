@@ -71,4 +71,4 @@ class TestPIIScan(unittest.TestCase):
                         m = re.search(r'\s*def (\w+)', line)
                         if m:
                             self.assertTrue(m.group(1).startswith('test'),
-                                            'Method name does not start with test: def ' + m.group(1) + ' in ' + file)
+                                            f'Method name does not start with test: def {m.group(1)} in {file}')
