@@ -26,7 +26,6 @@ class TestTeam_2(unittest.TestCase):
         # Check to make sure there is no result
         self.assertEqual(len(result), 0, "Negative test case should not find a result")
 
-
     def test_crypto(self):
         # Positive test case
         crypto_key = '1BoatSLRHtKNngkdXEeobR76b53LETtpyT'  # Valid BTC address Presidio should detect
