@@ -40,6 +40,18 @@ class TestTeam_3(unittest.TestCase):
 
     def test_us_itin(self):
         """Test US_ITIN functionality"""
+        
+        # Positive Test case
+        result = analyze_text('My ITIN is 912-70-1234', ['US_ITIN'])
+        print(result)
+        # Make sure 1 valid result was found
+        self.assertEqual(len(result), 1)
+        # Make sure it was a US_ITIN
+        self.assertEqual(result[0].entity_type, 'US_ITIN', 'Valid ITIN')
+
+        # Negative Test case
+        result = analyze_text('My ITIN is 123-45-6789', ['US_ITIN'])  # This is a typical SSN format
+        self.assertEqual(len(result), 0, 'Invalid ITIN')
 
 
 if __name__ == '__main__':
